@@ -1,0 +1,31 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: config-server
+  labels:
+    app: config-server
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: config-server
+  template:
+    metadata:
+      labels:
+        app: config-server
+    spec:
+      containers:
+      - name: config-server
+        image: config-server
+        imagePullPolicy: IfNotPresent
+        lifecycle:
+          # 쿠버네티스가 다른 구성 요소에게 종료되는 파드 쪽으로 요청 전달을 중지하도록 하는데,
+          # 파드 종료 신호와 병렬로 전달되기 때문에 짧은 시간동안 종료되는 파드에 요청이 전달될 수 있다.
+          preStop: # 쿠버네티스가 파드에 sigterm 신호를 보내기 전에 5초를 기다리게 한다.
+            exec:
+              command: [ "sh", "-c", "sleep 5" ]
+        ports:
+        - containerPort: 8888
+        env:
+        - name: BPL_JVM_THREAD_COUNT
+          value: "50"
