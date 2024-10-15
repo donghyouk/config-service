@@ -10,7 +10,7 @@ server:
 
 spring:
   application:
-    name: config-server
+    name: config-service
   lifecycle:
     timeout-per-shutdown-phase: 15s
   cloud:
