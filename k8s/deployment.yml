@@ -1,22 +1,22 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: config-server
+  name: config-service
   labels:
-    app: config-server
+    app: config-service
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: config-server
+      app: config-service
   template:
     metadata:
       labels:
-        app: config-server
+        app: config-service
     spec:
       containers:
-      - name: config-server
-        image: config-server
+      - name: config-service
+        image: config-service
         imagePullPolicy: IfNotPresent
         lifecycle:
           # 쿠버네티스가 다른 구성 요소에게 종료되는 파드 쪽으로 요청 전달을 중지하도록 하는데,

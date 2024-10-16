@@ -3,7 +3,7 @@ on: push
 
 env:
   REGISTRY: ghcr.io
-  IMAGE_NAME: donghyouk/config-server
+  IMAGE_NAME: donghyouk/config-service
   VERSION: latest
 
 jobs:
